@@ -1,6 +1,9 @@
 package org.example.service;
 
 import org.example.model.Greeting;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -67,6 +70,12 @@ public class GreetingServiceBean implements GreetingService {
     }
 
     @Override
+    @Cacheable(
+            value = "greetings",
+            key = "#id")
+    @CachePut(
+            value = "greetings",
+            key = "#result.id")
     public Greeting findOne(Long id) {
         Greeting gr = greetingMap.get(id);
         if(gr == null){
@@ -89,6 +98,9 @@ public class GreetingServiceBean implements GreetingService {
     }
 
     @Override
+    @CachePut(
+            value = "greetings",
+            key = "#greeting.id")
     public Greeting update(Greeting greeting) {
         Greeting persisted = findOne(greeting.getId());
         if(persisted == null){
@@ -101,7 +113,19 @@ public class GreetingServiceBean implements GreetingService {
     }
 
     @Override
+    @CacheEvict(
+            value = "greetings",
+            key = "#id"
+    )
     public void delete(Long id) {
         remove(id);
+    }
+
+    @Override
+    @CacheEvict(
+            value = "greetings",
+            allEntries = true)
+    public void evictCache(){
+
     }
 }
