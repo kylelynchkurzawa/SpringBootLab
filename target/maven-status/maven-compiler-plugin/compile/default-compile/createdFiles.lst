@@ -1,0 +1,5 @@
+org/example/service/GreetingService.class
+org/example/model/Greeting.class
+org/example/web/api/GreetingController.class
+org/example/service/GreetingServiceBean.class
+org/example/Application.class
