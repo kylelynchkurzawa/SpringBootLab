@@ -1,6 +1,7 @@
 package org.example.web.api;
 
 import org.example.Application;
+import org.example.model.Greeting;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,5 +60,27 @@ public class GreetingControllerTest {
     }
 
     @Test
-    public void test_
+    public void test_AddGreeting() throws JSONException {
+        Greeting gr = new Greeting();
+        gr.setText("What's up?");
+
+        HttpEntity<Greeting> entity = new HttpEntity<Greeting>(gr, headers);
+
+        ResponseEntity<String> response = trt.exchange(
+                createURLWithPort("/api/greetings"),
+                HttpMethod.POST,
+                entity,
+                String.class);
+
+        String expected = "{id:3,text:\"What's up?\"}";
+
+        JSONAssert.assertEquals(expected, response.getBody(), false);
+
+        //must clean up after test
+        response = trt.exchange(
+                createURLWithPort("/api/greetings/3"),
+                HttpMethod.DELETE,
+                entity,
+                String.class);
+    }
 }
