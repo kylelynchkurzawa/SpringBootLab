@@ -1,11 +1,4 @@
 pipeline {
-    agent {
-        label "ubuntu"
-    }
-    tools {
-        maven 'Maven 3.3.9'
-        jdk 'java 8 - 181'
-    }
     stages {
         stage ('Initialize') {
             steps {
