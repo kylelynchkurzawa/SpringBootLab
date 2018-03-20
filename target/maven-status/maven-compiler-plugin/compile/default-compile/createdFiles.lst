@@ -1,9 +1,0 @@
-org/example/service/EmailService.class
-org/example/batch/GreetingBatchBean.class
-org/example/util/AsyncResponse.class
-org/example/service/GreetingService.class
-org/example/web/api/GreetingController.class
-org/example/service/GreetingServiceBean.class
-org/example/Application.class
-org/example/service/EmailServiceBean.class
-org/example/model/Greeting.class
